@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOT HUB - MOVED</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#020a06;
+  color:#fff;
+  font-family:'JetBrains Mono', monospace;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 100%, rgba(0,255,136,0.06) 0%, transparent 40%);
+  z-index:0;
+}
+.stars{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:#00ff88;
+  border-radius:50%;
+  opacity:0.6;
+  animation:twinkle 3s infinite;
+}
+@keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:1}}
+.container{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:400px;
+  padding:24px 20px;
+  text-align:center;
+}
+.circle-wrap{
+  width:110px;
+  height:110px;
+  margin:0 auto 28px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.circle-outer{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, #00ff88, #0a2a18, #00ff88);
+  padding:3px;
+  animation:rotateSlow 6s linear infinite;
+  box-shadow:0 0 30px rgba(0,255,136,0.4), 0 0 60px rgba(0,255,136,0.15);
+}
+@keyframes rotateSlow{to{transform:rotate(360deg)}}
+.circle-inner{
+  width:100%;
+  height:100%;
+  background:#000;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:1;
+}
+.hex{
+  width:22px;
+  height:22px;
+  border:1.5px solid #00ff88;
+  transform:rotate(0deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:2px;
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.top-title{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:32px;
+  font-weight:700;
+  color:#00cc6a;
+  letter-spacing:1px;
+  line-height:1;
+  margin-bottom:10px;
+  min-height:36px;
+}
+.top-title span{
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:2px solid #00ff88;
+  width:0;
+}
+.top-title span.typing{
+  animation:typing 1.2s steps(7) forwards, blink 0.6s infinite;
+}
+.top-title span.done{border-right:none;width:auto}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{0%,50%{border-color:#00ff88}51%,100%{border-color:transparent}}
+.sub-title{
+  font-size:13px;
+  letter-spacing:2px;
+  color:#6b7a72;
+  margin-bottom:50px;
+  text-transform:uppercase;
+  min-height:16px;
+}
+.sub-title span{
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  width:0;
+  border-right:1px solid #00ff88;
+}
+.sub-title span.typing2{
+  animation:typing2 1.8s steps(18) forwards, blink 0.6s infinite;
+  animation-delay:1.4s;
+}
+.sub-title span.done{border-right:none;width:auto}
+@keyframes typing2{from{width:0}to{width:100%}}
+.card{
+  background:linear-gradient(180deg, rgba(10,25,15,0.9) 0%, rgba(5,15,8,0.95) 100%);
+  border:1px solid rgba(0,255,136,0.08);
+  border-radius:22px;
+  padding:28px 20px 20px;
+  box-shadow:0 0 0 1px rgba(0,255,136,0.05), 0 20px 50px rgba(0,0,0,0.8), 0 0 80px rgba(0,255,136,0.08);
+  position:relative;
+}
+.icon-box{
+  width:54px;
+  height:54px;
+  margin:0 auto 18px;
+  background:radial-gradient(circle at 30% 30%, rgba(20,40,25,1), rgba(5,15,8,1));
+  border:1px solid rgba(0,255,136,0.12);
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.icon-box svg{width:26px;height:26px;stroke:#00ff88;fill:none;stroke-width:1.8}
+.card h3{
+  font-size:16px;
+  font-weight:700;
+  color:#e8f5ec;
+  margin-bottom:12px;
+  line-height:1.3;
+}
+.card p{
+  font-size:12.5px;
+  line-height:1.6;
+  color:#6b8a78;
+  margin-bottom:6px;
+}
+.card p + p{margin-bottom:22px}
+.btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:rgba(5,20,12,0.9);
+  border:1px solid rgba(0,255,136,0.15);
+  color:#5fdc9a;
+  font-family:'JetBrains Mono', monospace;
+  font-weight:700;
+  font-size:13px;
+  padding:14px;
+  border-radius:14px;
+  text-decoration:none;
+  transition:all 0.3s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.btn:hover{background:rgba(0,255,136,0.08);border-color:rgba(0,255,136,0.3);transform:translateY(-1px);box-shadow:0 0 20px rgba(0,255,136,0.15)}
+.bottom{
+  margin-top:36px;
+  font-size:10px;
+  letter-spacing:0.5px;
+  color:#3a4a42;
+}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="container">
+  <div class="circle-wrap">
+    <div class="circle-outer"></div>
+    <div class="circle-inner"><div class="hex"></div></div>
+  </div>
+  <div class="top-title"><span id="type1">BOT HUB</span></div>
+  <div class="sub-title"><span id="type2">THIS HUB HAS MOVED</span></div>
+  <div class="card">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </div>
+    <h3>Everything is now in one place</h3>
+    <p>Both bots have been combined into a single, merged version.</p>
+    <p>Head over there to pair your number and access all the features.</p>
+    <a href="#" class="btn">↗ Merged Version</a>
+  </div>
+  <div class="bottom">All bots are now available on the merged platform</div>
+</div>
+<script>
+// stars like his
+const starsEl=document.getElementById('stars');
+for(let i=0;i<35;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=Math.random()*3+'s';
+  s.style.opacity=Math.random()*0.6+0.2;
+  starsEl.appendChild(s);
+}
+// typing C
+const t1=document.getElementById('type1');
+const t2=document.getElementById('type2');
+setTimeout(()=>{t1.classList.add('typing')},300);
+t1.addEventListener('animationend',(e)=>{
+  if(e.animationName==='typing'){
+    t1.classList.remove('typing');
+    t1.classList.add('done');
+    setTimeout(()=>{t2.classList.add('typing2')},200);
+  }
+});
+t2.addEventListener('animationend',(e)=>{
+  if(e.animationName==='typing2'){
+    t2.classList.remove('typing2');
+    t2.classList.add('done');
+  }
+});
+</script>
+</body>
+  </html>
