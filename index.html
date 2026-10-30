@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOT HUB - MOVED</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#020a06;
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+  padding:20px;
+}
+canvas{position:fixed;inset:0;pointer-events:none}
+#stars{z-index:0;opacity:1}
+#electric{z-index:1;opacity:1}
+.glow{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 100%, rgba(0,255,136,0.12) 0%, transparent 45%);
+  z-index:2;pointer-events:none;
+}
+.wrap{
+  position:relative;z-index:10;
+  width:100%;max-width:480px;
+  display:flex;flex-direction:column;align-items:center;
+}
+.circle{
+  width:112px;height:112px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #0a2a18, #000);
+  border:2px solid #1ed760;
+  box-shadow:0 0 0 6px rgba(30,215,96,0.15), 0 0 40px rgba(30,215,96,0.5), inset 0 0 20px rgba(30,215,96,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:22px;
+}
+.circle svg{width:32px;height:32px;stroke:#1ed760;stroke-width:1.8;fill:none}
+.title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:36px;font-weight:700;
+  color:#2be87a;letter-spacing:0.02em;
+  text-shadow:0 0 20px rgba(43,232,122,0.6);
+  margin-bottom:6px;
+}
+.moved{
+  font-size:13.5px;letter-spacing:0.28em;
+  color:rgba(255,255,255,0.48);margin-bottom:28px;
+}
+.card{
+  width:100%;
+  background:rgba(8,22,14,0.92);
+  border:1px solid rgba(0,255,136,0.18);
+  backdrop-filter:blur(16px);
+  border-radius:22px;
+  padding:28px 24px 22px;
+  box-shadow:0 0 0 1px rgba(0,255,136,0.06) inset, 0 20px 60px rgba(0,0,0,0.6), 0 0 80px rgba(0,255,136,0.1);
+  text-align:center;
+}
+.icon-box{
+  width:64px;height:64px;margin:0 auto 16px;
+  background:rgba(0,255,136,0.08);
+  border:1px solid rgba(0,255,136,0.18);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px rgba(0,255,136,0.15) inset;
+}
+.icon-box svg{width:28px;height:28px;stroke:#2be87a;stroke-width:2;fill:none}
+.h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:19px;font-weight:700;
+  margin-bottom:12px;
+}
+.p{
+  font-size:13.5px;line-height:1.65;
+  color:rgba(255,255,255,0.58);
+  margin-bottom:10px;
+}
+.btn{
+  width:100%;margin-top:18px;
+  background:rgba(6,18,11,0.95);
+  border:1px solid rgba(0,255,136,0.25);
+  color:#5cff9a;
+  border-radius:14px;
+  padding:15px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:15px;font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 0 1px rgba(0,255,136,0.08) inset, 0 8px 24px rgba(0,0,0,0.4);
+  transition:all .18s;
+}
+.btn:hover{background:rgba(0,255,136,0.12);border-color:rgba(0,255,136,0.45);transform:translateY(-1px);box-shadow:0 0 30px rgba(0,255,136,0.25)}
+.foot{
+  margin-top:28px;
+  font-size:11px;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.32);
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<canvas id="electric"></canvas>
+<div class="glow"></div>
+
+<div class="wrap">
+  <div class="circle">
+    <svg viewBox="0 0 24 24"><path d="M12 2.5l7 4v7l-7 4-7-4v-7l7-4z"/></svg>
+  </div>
+  <div class="title">BOT HUB</div>
+  <div class="moved">THIS HUB HAS MOVED</div>
+
+  <div class="card">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24"><path d="M10 13V8l6 0v2"/><path d="M14 11l5-5h-3V3"/><path d="M18 3v0"/><rect x="3" y="7" width="12" height="11" rx="2"/></svg>
+    </div>
+    <div class="h2">Everything is now in one place</div>
+    <div class="p">Both bots have been combined into a single, merged version.</div>
+    <div class="p">Head over there to pair your number and access all the features.</div>
+    <button class="btn" id="goBtn">↗ Merged Version</button>
+  </div>
+
+  <div class="foot">All bots are now available on the merged platform</div>
+</div>
+
+<script>
+const TARGET="https://storm-cyber-pair-url.onrender.com";
+document.getElementById('goBtn').onclick=()=>location.href=TARGET;
+
+// STARS BRIGHT FIXED
+const cs=document.getElementById('stars'),xs=cs.getContext('2d');let w,h,stars=[];
+function rs(){w=cs.width=innerWidth;h=cs.height=innerHeight}addEventListener('resize',rs);rs();
+for(let i=0;i<200;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+0.5,s:Math.random()*0.4+0.1,op:Math.random()*0.9+0.2});
+(function anim(){
+xs.clearRect(0,0,w,h);xs.fillStyle='#020a06';xs.fillRect(0,0,w,h);
+stars.forEach(s=>{s.y-=s.s;if(s.y<0){s.y=h;s.x=Math.random()*w}
+xs.beginPath();xs.arc(s.x,s.y,s.r,0,Math.PI*2);
+xs.fillStyle=`rgba(120,255,190,${s.op})`;
+xs.shadowBlur=s.r*5;xs.shadowColor='#1ed760';xs.fill();xs.shadowBlur=0;
+});requestAnimationFrame(anim)})();
+
+// ELECTRIC BIG VISIBLE NOW
+const ce=document.getElementById('electric'),xe=ce.getContext('2d');
+function re(){ce.width=innerWidth;ce.height=innerHeight}addEventListener('resize',re);re();
+function bigStrike(x,y){
+  xe.beginPath();xe.moveTo(x,y);
+  let cx=x,cy=y;
+  const segments=12+Math.random()*18;
+  for(let i=0;i<segments;i++){
+    cx += (Math.random()-0.5)*22;
+    cy += Math.random()*14+4;
+    if(Math.random()>0.6){ // branch
+      xe.moveTo(cx,cy);
+      xe.lineTo(cx+(Math.random()-0.5)*30, cy+Math.random()*18);
+      xe.moveTo(cx,cy);
+    }
+    xe.lineTo(cx,cy);
+  }
+  const grad=xe.createLinearGradient(x,y,cx,cy);
+  grad.addColorStop(0,'rgba(0,255,136,0.9)');
+  grad.addColorStop(0.5,'rgba(80,255,160,0.8)');
+  grad.addColorStop(1,'rgba(0,255,136,0.2)');
+  xe.strokeStyle=grad;
+  xe.lineWidth=2.2+Math.random()*2.8;
+  xe.shadowBlur=18;xe.shadowColor='#1ed760';
+  xe.lineCap='round';xe.lineJoin='round';
+  xe.stroke();xe.shadowBlur=0;
+}
+function spawn(){
+  xe.clearRect(0,0,ce.width,ce.height);
+  const count=2+Math.floor(Math.random()*3);
+  for(let i=0;i<count;i++){
+    bigStrike(Math.random()*ce.width, Math.random()*ce.height*0.5);
+  }
+  setTimeout(()=>xe.clearRect(0,0,ce.width,ce.height),650);
+}
+setInterval(spawn,2800);
+spawn();
+</script>
+</body>
+      </html>
